@@ -1,0 +1,54 @@
+---
+title: "EDA - Casino Data"
+author: "Aakanksha Baid"
+date: "1/27/2020"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Step 1a: Import the data 
+
+```{r}
+# import
+casino_DF <- read.csv("Data/casino.csv")
+```
+
+## Step 1b: Install the package tidyverse 
+
+```{r}
+#install.packages("tidyverse")
+library(tidyverse)
+```
+
+
+## Step 2: Scatter plot 1
+
+```{r}
+# hold vs coin_in colored by location
+ggplot(data=casino_DF) +
+  geom_point(mapping = aes(x=hold,y=coin_in,color=location))
+```
+
+The above plot shows a negative relationship between hold and coin-ins.
+
+
+## Step 3: Scatter plot 2
+
+```{r}
+# hold vs coin_in for each location
+ggplot(data=casino_DF) +
+  geom_point(mapping = aes(x=hold,y=coin_in)) +
+  facet_wrap(~ location,nrow = 5)
+```
+
+The above plot shows that the relationship between hold and coin-in is in fact not negatively related for all locations, when we factor in location.
+
+
+## Step 4: Interpret the plots
+
+a. The relationship between holds and coin-in of slot machines varies across locations as location A has high coin-in even at low hold which is also the case for locations I and J, whereas for other locations, hold is fairly constant at low coin-ins. This is not clear from Step 2 plot.
+
+b. The Step 3 plot is better to interpret relationships between the variables as it clearly displays the relationship between coin-in and hold for each location and the graph is intuitive. The step 2 plot is not visually appealing as it is not able to display the large number of locations on the same plot (eg. location A is missing) making it difficult to identify any meaningful relationship due to high number of locations. 
